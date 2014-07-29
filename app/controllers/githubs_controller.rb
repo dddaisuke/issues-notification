@@ -1,5 +1,5 @@
 class GithubsController < ApplicationController
-  def show
+  def webhook
     render text: 'aaaa'
   end
 end
