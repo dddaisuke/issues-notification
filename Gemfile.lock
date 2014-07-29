@@ -80,6 +80,7 @@ GEM
     mysql2 (0.3.16)
     octokit (3.2.0)
       sawyer (~> 0.5.3)
+    pg (0.17.1)
     polyglot (0.3.5)
     pry (0.10.0)
       coderay (~> 1.1.0)
@@ -168,6 +169,7 @@ DEPENDENCIES
   jquery-rails
   mysql2
   octokit (~> 3.0)
+  pg
   pry
   pry-byebug
   pry-rails
