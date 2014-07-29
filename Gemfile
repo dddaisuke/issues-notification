@@ -31,6 +31,10 @@ gem 'spring',        group: :development
 
 group :development, :test do
   gem 'dotenv-rails'
+  gem 'pry'
+  gem 'pry-rails'
+  gem 'pry-byebug'
+  gem 'pry-rescue'
 end
 
 # Use ActiveModel has_secure_password
