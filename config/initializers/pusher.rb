@@ -1,5 +1,5 @@
-if Rails.env.development?
-  Pusher.app_id = '55604'
-  Pusher.key    = 'f4c414ccc2b351f0f453'
-  Pusher.secret = '143db6ad0c0faeff4c5c'
-end
+require 'pusher'
+Pusher.app_id = ENV['PUSHER_APP_ID']
+Pusher.key = ENV['PUSHER_KET']
+Pusher.secret = ENV['PUSHER_SECRET']
+Pusher.url = ENV['PUSHER_URL']
