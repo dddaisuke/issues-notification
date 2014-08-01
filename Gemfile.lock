@@ -58,6 +58,13 @@ GEM
     execjs (2.2.1)
     faraday (0.9.0)
       multipart-post (>= 1.2, < 3)
+    haml (4.0.5)
+      tilt
+    haml-rails (0.5.3)
+      actionpack (>= 4.0.1)
+      activesupport (>= 4.0.1)
+      haml (>= 3.1, < 5.0)
+      railties (>= 4.0.1)
     hike (1.2.3)
     httpclient (2.3.4.1)
     i18n (0.6.11)
@@ -165,6 +172,7 @@ DEPENDENCIES
   binding_of_caller
   coffee-rails (~> 4.0.0)
   dotenv-rails
+  haml-rails
   jbuilder (~> 2.0)
   jquery-rails
   mysql2
