@@ -3,7 +3,7 @@ class GithubsController < ApplicationController
   skip_before_filter :check_oauth_token
 
   def webhook
-    issue = params[:github][:issue]
+    issue = params[:issue]
     return render text: '' if issue[:pull_request]
     return render text: '' if params[:comment]
 
@@ -24,7 +24,7 @@ class GithubsController < ApplicationController
       title: issue[:title],
       url: issue[:html_url],
       owner_name: issue[:user][:login],
-      closed_at: I18n.l(issue[:closed_at]),
+      closed_at: I18n.l(Time.parse(issue[:closed_at])),
     }
 
     push_issue(issue[:state], pusher_params)

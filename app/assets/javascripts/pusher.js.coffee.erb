@@ -2,7 +2,7 @@ Pusher.log = (message) ->
   window.console.log message  if window.console and window.console.log
   return
 
-pusher = new Pusher("217bd49a38581d0fe86b")
+pusher = new Pusher("<%= Pusher.key %>")
 channel = pusher.subscribe("issue")
 channel.bind "closed", (data) ->
   console.log(data)
