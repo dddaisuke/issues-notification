@@ -1,0 +1,13 @@
+#box
+
+#issues_box
+  - @issues.each do |issue|
+    .issue{ id: "issue_#{issue[:number]}" }
+      = link_to issue[:url], target: '_blank' do
+        .user
+          .avatar
+            %img{ src: "#{issue[:sender_avatar_url]}" }
+        .timestamp
+          = l(issue[:closed_at])
+        .title
+          = issue[:title]
