@@ -15,3 +15,8 @@ GitHub issuesをcloseした通知を受けるダッシュボードです。
 [top_controller](https://github.com/dddaisuke/issues-notification/blob/master/app/controllers/top_controller.rb)で表示するリポジトリを制御できます。
 
 リアルタイムにPush通知を受けたいリポジトリのWebhookを設定する。URLは`http://example.com/github/webhook` です。
+
+本番環境の設定
+==============
+
+サーバーはherokuで運用できるので、.env.sampleに設定する必要があるキーをすべて`heroku config:add` で追加すれば動きます。
