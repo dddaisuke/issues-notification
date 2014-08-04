@@ -8,6 +8,6 @@
           .avatar
             %img{ src: "#{issue[:sender_avatar_url]}" }
         .timestamp
-          = l(issue[:closed_at])
+          = issue[:closed_at]
         .title
           = issue[:title]

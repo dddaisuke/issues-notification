@@ -23,7 +23,7 @@ class GithubsController < ApplicationController
       title: issue[:title],
       url: issue[:html_url],
       owner_name: issue[:user][:login],
-      closed_at: issue[:closed_at],
+      closed_at: I18n.l(issue[:closed_at]),
     }
 
     push_issue(issue[:state], pusher_params)
