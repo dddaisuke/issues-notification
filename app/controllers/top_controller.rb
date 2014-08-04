@@ -1,8 +1,21 @@
 class TopController < ApplicationController
   def show
     @client = Octokit::Client.new(access_token: session[:github_token])
-    issues = @client.list_issues("manabo-inc/manabo", state: 'closed', sort: 'updated')
-    @issues = []
+    issues_by_closed_at = []
+    issues_by_closed_at += load_issue_informations(@client, 'manabo-inc', 'manabo')
+    issues_by_closed_at += load_issue_informations(@client, 'manabo-inc', 'mana.bo_android')
+    issues_by_closed_at += load_issue_informations(@client, 'manabo-inc', 'mana.bo_iOS')
+    issues_by_closed_at.sort! {|a, b| a[:closed_at] <=> b[:closed_at] }.reverse!
+    @issues = issues_by_closed_at.map do |issue_by_closed_at|
+      issue_by_closed_at[:issue]
+    end
+  end
+
+  private
+
+  def load_issue_informations(client, organization, repository)
+    result_issues = []
+    issues = client.list_issues("#{organization}/#{repository}", state: 'closed', sort: 'updated')
     issues.each do |issue|
       next if issue[:pull_request]
       assignee = issue[:assignee]
@@ -14,8 +27,8 @@ class TopController < ApplicationController
         sender_avatar_url = issue[:user][:avatar_url]
       end
 
-      closed_by = Rails.cache.fetch("issue_#{issue[:number]}") do
-        result = @client.issue('manabo-inc/manabo', issue[:number])
+      closed_by = Rails.cache.fetch("#{repository}#issue_#{issue[:number]}") do
+        result = client.issue("#{organization}/#{repository}", issue[:number])
         {
           sender_name: result[:closed_by][:login],
           sender_avatar_url: result[:closed_by][:avatar_url],
@@ -32,7 +45,8 @@ class TopController < ApplicationController
         owner_name: issue[:user][:login],
         closed_at: I18n.l(issue[:closed_at]),
       }
-      @issues << issue
+      result_issues << { closed_at: issue[:closed_at].to_time.to_i, issue: issue }
     end
+    result_issues
   end
 end
