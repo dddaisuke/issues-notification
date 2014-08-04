@@ -1,5 +1,6 @@
 class GithubsController < ApplicationController
   skip_before_filter :verify_authenticity_token
+  skip_before_filter :check_oauth_token
 
   def webhook
     issue = params[:github][:issue]
