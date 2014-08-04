@@ -4,8 +4,9 @@ class GithubsController < ApplicationController
 
   def webhook
     issue = params[:issue]
-    return render text: '' if issue[:pull_request]
-    return render text: '' if params[:comment]
+    if !issue || issue[:pull_request] || params[:comment]
+      return render text: ''
+    end
 
     assignee = issue[:assignee]
     if assignee
