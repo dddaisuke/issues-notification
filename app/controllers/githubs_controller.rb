@@ -8,8 +8,12 @@ class GithubsController < ApplicationController
       return render text: ''
     end
 
+    sender = params[:sender]
     assignee = issue[:assignee]
-    if assignee
+    if sender
+      sender_name = sender[:login]
+      sender_avatar_url = sender[:avatar_url]
+    elsif assignee
       sender_name = assignee[:login]
       sender_avatar_url = assignee[:avatar_url]
     else
